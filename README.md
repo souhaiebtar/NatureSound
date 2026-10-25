@@ -16,6 +16,19 @@ npm run build
 npm run preview
 ```
 
+## Native Android
+
+```sh
+export ANDROID_HOME=$HOME/Android/Sdk
+npm run android:sync       # Build web assets and copy them into the native app
+npm run android:build      # Produce a debug APK
+npm run android:open       # Open the native project in Android Studio
+```
+
+Debug APK: `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+The native package is `com.moodil.naturesounds`, with Android 6.0 (API 23) as the minimum supported version. Audio files are packaged as app assets, so nature playback does not require a network connection.
+
 ## Audio
 
 All 38 long-form Ogg recordings are bundled in `public/sounds/`, grouped by sound (`rain`, `forest`, `bird`, etc.). Each filename matches its Moodil variation, such as `rain/rain_dense.ogg`. Playback works without third-party audio requests after the app and selected sounds have loaded.

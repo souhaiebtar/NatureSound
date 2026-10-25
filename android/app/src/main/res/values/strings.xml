@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Moodil</string>
+    <string name="title_activity_main">Moodil</string>
+    <string name="package_name">com.moodil.naturesounds</string>
+    <string name="custom_url_scheme">com.moodil.naturesounds</string>
+</resources>
