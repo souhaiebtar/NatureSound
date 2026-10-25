@@ -28,7 +28,7 @@ npm run android:open       # Open the native project in Android Studio
 
 Debug APK: `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-For a release, run `cd android && ./gradlew assembleRelease`, then ZIP-align and sign `app-release-unsigned.apk` with your private release key. Keep the key and its credentials outside the repository, and retain the same key for all future updates. The current signed artifact is `Moodil-1.1-release.apk`.
+For a release, run `cd android && ./gradlew assembleRelease`, then ZIP-align and sign `app-release-unsigned.apk` with your private release key. Keep the key and its credentials outside the repository, and retain the same key for all future updates. The current signed artifact is `Moodil-1.2-release.apk`.
 
 The native package is `com.moodil.naturesounds`, with Android 6.0 (API 23) as the minimum supported version. Audio files are packaged as app assets, so nature playback does not require a network connection. While the app is running, a low-priority ongoing notification provides a quick way back; Android 13+ asks for notification permission on first launch.
 
@@ -45,5 +45,6 @@ SoundCloud tracks use the official embedded SoundCloud player. The download acti
 - Layer any of 15 sound types and adjust each layer's volume and variation
 - Curated mixes, custom saved mixes, and local persistence
 - Global pause, sleep timer, search, filters, and responsive navigation
+- Persistent light/dark themes with matching Android system bars
 - SoundCloud track and playlist imports
 - Installable PWA manifest for an Android app-like experience
