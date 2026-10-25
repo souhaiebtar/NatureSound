@@ -20,6 +20,7 @@ npm run preview
 
 ```sh
 export ANDROID_HOME=$HOME/Android/Sdk
+export JAVA_HOME=/path/to/jdk-21 # A full JDK 17–21, including javac
 npm run android:sync       # Build web assets and copy them into the native app
 npm run android:build      # Produce a debug APK
 npm run android:open       # Open the native project in Android Studio
