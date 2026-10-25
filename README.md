@@ -28,6 +28,8 @@ npm run android:open       # Open the native project in Android Studio
 
 Debug APK: `android/app/build/outputs/apk/debug/app-debug.apk`.
 
+For a release, run `cd android && ./gradlew assembleRelease`, then ZIP-align and sign `app-release-unsigned.apk` with your private release key. Keep the key and its credentials outside the repository, and retain the same key for all future updates. The current signed artifact is `Moodil-1.0-release.apk`.
+
 The native package is `com.moodil.naturesounds`, with Android 6.0 (API 23) as the minimum supported version. Audio files are packaged as app assets, so nature playback does not require a network connection.
 
 ## Audio

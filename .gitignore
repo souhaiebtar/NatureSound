@@ -1,4 +1,7 @@
 node_modules/
 dist/
 *.apk
+*.apk.idsig
+*.jks
+*.keystore
 .DS_Store
