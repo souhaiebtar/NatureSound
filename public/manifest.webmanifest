@@ -1,0 +1,10 @@
+{
+  "name": "Moodil — Nature Sounds",
+  "short_name": "Moodil",
+  "description": "Your pocket of peace. Mix calming nature sounds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f1",
+  "theme_color": "#263e32",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
