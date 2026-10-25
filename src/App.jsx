@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { Capacitor } from '@capacitor/core'
+import { StatusBar, Style } from '@capacitor/status-bar'
 import {
   AudioLines, Bird, Bookmark, Check, ChevronRight, Cloud, CloudDownload,
   CloudLightning, CloudRain, Download, ExternalLink, Flame, Flower2, Footprints,
   Headphones, Heart, Home, Leaf, Library, Menu, Moon, MoreHorizontal, Mountain,
-  Music2, Pause, Play, Plus, Search, Settings2, Share2, Sparkles, Square, Timer,
+  Music2, Pause, Play, Plus, Search, Settings2, Share2, Sparkles, Square, Sun, Timer,
   Trash2, Trees, User, Volume2, Waves, Wind, X
 } from 'lucide-react'
 
@@ -33,6 +35,11 @@ const PRESETS = [
 
 const soundUrl = (id, variation) => `/sounds/${id}/${id}${variation ? `_${variation.toLowerCase()}` : ''}.ogg`
 const getInitialSaved = () => { try { return JSON.parse(localStorage.getItem('moodil-mixes') || '[]') } catch { return [] } }
+const getInitialTheme = () => {
+  const saved = localStorage.getItem('moodil-theme')
+  if (saved === 'light' || saved === 'dark') return saved
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
 
 function Brand({ compact = false }) {
   return <div className={`brand ${compact ? 'compact' : ''}`}><span className="brand-mark"><Leaf size={22} strokeWidth={2.3} /></span><span>moodil<span className="brand-dot">.</span></span></div>
@@ -42,6 +49,7 @@ function Equalizer() { return <span className="equalizer" aria-label="Playing"><
 
 export default function App() {
   const [active, setActive] = useState([])
+  const [theme, setTheme] = useState(getInitialTheme)
   const [volumes, setVolumes] = useState({})
   const [variations, setVariations] = useState({})
   const [playing, setPlaying] = useState(true)
@@ -79,6 +87,15 @@ export default function App() {
   }, [active, volumes, variations, playing])
 
   useEffect(() => { localStorage.setItem('moodil-mixes', JSON.stringify(saved)) }, [saved])
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('moodil-theme', theme)
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#151a16' : '#f5f6f1')
+    if (Capacitor.isNativePlatform()) {
+      StatusBar.setBackgroundColor({ color: theme === 'dark' ? '#151a16' : '#f5f6f1' }).catch(() => {})
+      StatusBar.setStyle({ style: theme === 'dark' ? Style.Light : Style.Dark }).catch(() => {})
+    }
+  }, [theme])
   useEffect(() => () => { Object.values(audio.current).forEach(el => el.pause()); clearTimeout(timer.current) }, [])
 
   const toggleSound = (id) => {
@@ -132,6 +149,7 @@ export default function App() {
         <div className="header-actions">
           {searchOpen && <input autoFocus className="header-search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search sounds…" aria-label="Search sounds" />}
           <button className="icon-button" onClick={() => { setSearchOpen(!searchOpen); if (searchOpen) setQuery('') }} aria-label="Search"><Search size={20} /></button>
+          <button className="icon-button theme-toggle" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>{theme === 'light' ? <Moon size={19} /> : <Sun size={19} />}</button>
           <button className="avatar" onClick={() => setView('Profile')} aria-label="Profile"><span>JD</span><i /></button>
         </div>
       </header>
