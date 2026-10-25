@@ -31,7 +31,7 @@ const PRESETS = [
   { name: 'Cozy evening', subtitle: 'Crackling fire · Soft rain', sounds: ['fire', 'rain'], image: 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=1000&q=80' },
 ]
 
-const soundUrl = (id, variation) => `https://www.moodil.com/sounds/long/${id}${variation ? `_${variation.toLowerCase()}` : ''}.ogg`
+const soundUrl = (id, variation) => `/sounds/${id}/${id}${variation ? `_${variation.toLowerCase()}` : ''}.ogg`
 const getInitialSaved = () => { try { return JSON.parse(localStorage.getItem('moodil-mixes') || '[]') } catch { return [] } }
 
 function Brand({ compact = false }) {
